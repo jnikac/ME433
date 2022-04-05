@@ -9,7 +9,7 @@
 #pragma config BWP = OFF // disable boot write protect
 #pragma config CP = OFF // disable code protect
 // DEVCFG1
-#pragma config FNOSC = FRC // use fast frc oscillator with pll
+#pragma config FNOSC = FRCPLL // use fast frc oscillator with pll
 #pragma config FSOSCEN = OFF // disable secondary oscillator
 #pragma config IESO = OFF // disable switching clocks
 #pragma config POSCMOD = OFF // primary osc disabled
@@ -74,19 +74,19 @@ int main() {
 
             LATAbits.LATA4 = 1;
 
-            while(_CP0_GET_COUNT() < 2000000){}
+            while(_CP0_GET_COUNT() < 12000000){}
 
             LATAbits.LATA4 = 0;
 
             _CP0_SET_COUNT(0);
 
-            while(_CP0_GET_COUNT() < 2000000){}
+            while(_CP0_GET_COUNT() < 12000000){}
 
             LATAbits.LATA4 = 1;
 
             _CP0_SET_COUNT(0);
 
-            while(_CP0_GET_COUNT() < 2000000){}
+            while(_CP0_GET_COUNT() < 12000000){}
 
            
 

@@ -10,21 +10,22 @@ int main(){
      ws2812b_setup();
      
      wsColor LEDs[4];
-     LEDs[0].r = 0b11111111;
-     LEDs[0].g = 0b00000001;
-     LEDs[0].b = 0b00000001;
-     
-     LEDs[1].r = 0b00000001;
-     LEDs[1].g = 0b11111111;
-     LEDs[1].b = 0b00000001;
-     
-     LEDs[2].r = 0b00000001;
-     LEDs[2].g = 0b00000001;
-     LEDs[2].b = 0b11111111;
-     
-     LEDs[3].r = 0b11111111;
-     LEDs[3].g = 0b11111111;
-     LEDs[3].b = 0b11111111;
-     ws2812b_setColor(LEDs, 4);
+     int i = 0;
+     while(1){
+        LEDs[0] = HSBtoRGB(i, .5, .5);
+        LEDs[1] = HSBtoRGB(i + 20 , .5, .5);
+        LEDs[2] = HSBtoRGB(i + 40, .5, .5);
+        LEDs[3] = HSBtoRGB(i + 80, .5, .5);
+
+  
+        ws2812b_setColor(LEDs, 4);
+        _CP0_SET_COUNT(0);
+        while(_CP0_GET_COUNT() < 48000000 / 1000){} //wait
+        i++;
+        if(i == 255){
+            i = 0;
+        }
+
+     }
 
  }

@@ -3,8 +3,8 @@
 #include "ws2812b.h"
 // other includes if necessary for debugging
 
-#define LOWTIME 15 // number of 48MHz cycles to be low for 0.35uS
-#define HIGHTIME 65 // number of 48MHz cycles to be high for 1.65uS
+#define LOWTIME 16// number of 48MHz cycles to be low for 0.35uS
+#define HIGHTIME 67 // number of 48MHz cycles to be high for 1.65uS
 
 // setup Timer2 for 48MHz, and setup the output pin
 void ws2812b_setup() {
@@ -74,7 +74,7 @@ void ws2812b_setColor(wsColor * c, int numLEDs) {
         
         for (j = 7; j >= 0; --j) {
             // if the bit is a 1
-            if (((c[i].g >> j) & 0b1) == 0b1){ //this will take the red byte of LED 1 and shift it j bits to the right, and check if that is 1
+            if (((c[i].b >> j) & 0b1) == 0b1){ //this will take the red byte of LED 1 and shift it j bits to the right, and check if that is 1
                 // the high is longer
                 delay_times[nB] = delay_times[nB - 1] + HIGHTIME;
                 nB++;
